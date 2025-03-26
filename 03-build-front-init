@@ -11,6 +11,8 @@ then
     cd /home/jovyan/open-webui-vite
     npm install && npm audit fix
     npm run build
+    # Update the flag to prevent rebuilding on subsequent starts
+    sed -i 's/export BUILD_FRONTEND="false"/export BUILD_FRONTEND="true"/g' /home/jovyan/.fend
     echo "INFO: Frontend ready..."
 else
     echo "INFO: Frontend ready..."
