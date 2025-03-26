@@ -33,7 +33,7 @@ COPY --chmod=755 02-conda-init /etc/cont-init.d/02-conda-init
 COPY --chmod=755 03-build-front-init /etc/cont-init.d/03-build-front-init
 
 # Clone Open WebUI repository to tmp_home (which will be copied to home at runtime)
-RUN git clone https://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@github.com/DrJonnyMoney/open-webui-vite.git /tmp_home/jovyan/open-webui-vite
+RUN git clone https://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@github.com/DrJonnyMoney/open-webui-vite.git /tmp_home/jovyan/open-webui-vite
 
 # Install Ollama
 RUN curl -fsSL https://ollama.com/install.sh | sh
