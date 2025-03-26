@@ -67,6 +67,8 @@ RUN echo 'export PATH="/tmp_home/jovyan/.nvm/versions/node/v20.*/bin:$PATH"' >> 
 # Install global npm packages for Svelte development (e.g., SvelteKit and Vite)
 RUN bash -c "source /tmp_home/jovyan/.nvm/nvm.sh && npm install -g @sveltejs/kit vite"
 
+WORKDIR /tmp_home/jovyan/open-webui-vite/backend
+RUN pip install -r requirements.txt
 
 USER root
 
