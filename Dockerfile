@@ -50,18 +50,23 @@ RUN echo 'export BUILD_FRONTEND="false"' > /tmp_home/jovyan/.fend \
 USER $NB_UID
 
 # Install NVM for the notebook user
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash \
- && echo 'export NVM_DIR="/tmp_home/jovyan/.nvm"' >> /tmp_home/jovyan/.bashrc \
- && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> /tmp_home/jovyan/.bashrc
+ENV NVM_DIR /tmp_home/jovyan/.nvm
+RUN mkdir -p $NVM_DIR \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash \
+    && echo 'export NVM_DIR="/tmp_home/jovyan/.nvm"' >> /tmp_home/jovyan/.bashrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> /tmp_home/jovyan/.bashrc
 
 # Load nvm and install the specified Node version; set it as default
-RUN bash -c "source /tmp_home/jovyan/.nvm/nvm.sh && nvm install 20 && nvm alias default 20"
+RUN . $NVM_DIR/nvm.sh \
+    && nvm install 20 \
+    && nvm alias default 20
 
 # Ensure the Node.js binary directory is in PATH for future shells
-RUN echo 'export PATH="/tmp_home/jovyan/.nvm/versions/node/$(nvm version default)/bin:$PATH"' >> /tmp_home/jovyan/.bashrc
+RUN echo 'export PATH="/tmp_home/jovyan/.nvm/versions/node/v20.*/bin:$PATH"' >> /tmp_home/jovyan/.bashrc
 
 # Install global npm packages for Svelte development (e.g., SvelteKit and Vite)
 RUN bash -c "source /tmp_home/jovyan/.nvm/nvm.sh && npm install -g @sveltejs/kit vite"
+
 
 USER root
 
