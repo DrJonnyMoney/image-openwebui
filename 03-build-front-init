@@ -1,0 +1,17 @@
+#!/command/with-contenv bash
+export VITE_URL_PREFIX=$NB_PREFIX
+
+source /home/jovyan/.fend
+
+if [ "$BUILD_FRONTEND" = "false" ]
+then
+    echo "INFO: building webapp frontend..."
+    cd /home/jovyan/open-webui-vite/backend
+    pip install -r requirements.txt
+    cd /home/jovyan/open-webui-vite
+    npm install && npm audit fix
+    npm run build
+    echo "INFO: Frontend ready..."
+else
+    echo "INFO: Frontend ready..."
+fi
