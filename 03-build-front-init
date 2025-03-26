@@ -17,8 +17,6 @@ fi
 if [ "$BUILD_FRONTEND" = "false" ]
 then
     echo "INFO: building webapp frontend..."
-    cd /home/jovyan/open-webui-vite/backend
-    pip install -r requirements.txt
     cd /home/jovyan/open-webui-vite
     npm install && npm audit fix
     npm run build
