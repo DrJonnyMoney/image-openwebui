@@ -3,3 +3,4 @@ exec 2>&1
 
 exec ollama serve
 exec ollama pull llama3.2
+exec ollama pull deepseek-r1:7b
