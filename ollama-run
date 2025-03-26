@@ -2,4 +2,3 @@
 exec 2>&1
 
 exec ollama serve
-exec ollama run llama3.3
