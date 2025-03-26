@@ -1,0 +1,6 @@
+#!/command/with-contenv bash
+cd /home/jovyan/open-webui-vite/backend
+exec 2>&1
+
+export URL_PREFIX=$NB_PREFIX
+exec ./start.sh
