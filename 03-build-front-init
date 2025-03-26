@@ -3,6 +3,17 @@ export VITE_URL_PREFIX=$NB_PREFIX
 
 source /home/jovyan/.fend
 
+# Source NVM and set up Node environment
+export NVM_DIR="/home/jovyan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Check if Node.js is available
+if ! command -v node &> /dev/null; then
+    echo "ERROR: Node.js not found. NVM may not be properly installed or sourced."
+    exit 1
+fi
+
+
 if [ "$BUILD_FRONTEND" = "false" ]
 then
     echo "INFO: building webapp frontend..."
